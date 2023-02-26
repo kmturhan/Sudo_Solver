@@ -28,9 +28,6 @@ function MyForm() {
               let sectionLimit3 = 1;
               let sectionIndex = 1;
               for (let row = 1; row <= 9; row++) {
-                  
-                
-                
                 arr.push(
                   <input key={"row1"+row} inputMode='numeric' type="number" className={`table-row-cell table-section-${sectionIndex} table-row-${row}`} onKeyDown={(evt) => evt.key === 'e' && evt.preventDefault()} onChange={(e) => setName(e.target.value)}></input>
                 );
@@ -42,7 +39,7 @@ function MyForm() {
                   sectionIndex++;
                 }
               }
-              return arr;
+              return <div className='table-row'>{arr}</div>;
             })()}
           </div>
           <div className='table-row'>
