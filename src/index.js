@@ -9,8 +9,13 @@ function MyForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("test",event)
-    event.target[1].value = 9999;
+    console.log("test",event);
+    let test = ["test","test2","test3"];
+    [...event.target].forEach(element => {
+      
+      element.value = 22;
+    });
+
   }
 
   return (
@@ -20,10 +25,22 @@ function MyForm() {
           <div className='table-row'>
             {(() => {
               const arr = [];
-              for (let index = 1; index < 9; index++) {
+              let sectionLimit3 = 1;
+              let sectionIndex = 1;
+              for (let row = 1; row <= 9; row++) {
+                  
+                
+                
                 arr.push(
-                  <input key={"row1"+index} inputMode='numeric' type="number" className={`table-row-cell table-row1-cell-${index}`} onKeyDown={(evt) => evt.key === 'e' && evt.preventDefault()} onChange={(e) => setName(e.target.value)}></input>
+                  <input key={"row1"+row} inputMode='numeric' type="number" className={`table-row-cell table-section-${sectionIndex} table-row-${row}`} onKeyDown={(evt) => evt.key === 'e' && evt.preventDefault()} onChange={(e) => setName(e.target.value)}></input>
                 );
+                if(sectionLimit3 < 3) {
+                  sectionLimit3++;
+                }
+                else {
+                  sectionLimit3 = 1;
+                  sectionIndex++;
+                }
               }
               return arr;
             })()}
@@ -31,7 +48,7 @@ function MyForm() {
           <div className='table-row'>
           {(() => {
               const arr = [];
-              for (let index = 1; index < 9; index++) {
+              for (let index = 1; index <= 9; index++) {
                 arr.push(
                   <input key={"row1"+index} inputMode='numeric' type="number" className={`table-row-cell table-row2-cell-${index}`} onKeyDown={(evt) => evt.key === 'e' && evt.preventDefault()} onChange={(e) => setName(e.target.value)}></input>
                 );
@@ -42,7 +59,7 @@ function MyForm() {
           <div className='table-row'>
           {(() => {
               const arr = [];
-              for (let index = 1; index < 9; index++) {
+              for (let index = 1; index <= 9; index++) {
                 arr.push(
                   <input key={"row1"+index} inputMode='numeric' type="number" className={`table-row-cell table-row3-cell-${index}`} onKeyDown={(evt) => evt.key === 'e' && evt.preventDefault()} onChange={(e) => setName(e.target.value)}></input>
                 );
