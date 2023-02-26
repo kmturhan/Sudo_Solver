@@ -22,50 +22,32 @@ function MyForm() {
     <form className='table' onSubmit={handleSubmit}>
         <h1>SUDO-SOLVER</h1>
         <div className='table-wrapper'>
-          <div className='table-row'>
+          
             {(() => {
               const arr = [];
-              let sectionLimit3 = 1;
-              let sectionIndex = 1;
-              for (let row = 1; row <= 9; row++) {
-                arr.push(
-                  <input key={"row1"+row} inputMode='numeric' type="number" className={`table-row-cell table-section-${sectionIndex} table-row-${row}`} onKeyDown={(evt) => evt.key === 'e' && evt.preventDefault()} onChange={(e) => setName(e.target.value)}></input>
-                );
-                if(sectionLimit3 < 3) {
-                  sectionLimit3++;
+              let allInputsHtml = [];
+              for(var test = 1; test <= 9; test++) {
+                let blocksInputList = [];
+                let sectionLimit3 = 1;
+                let sectionIndex = 1;
+                for (let row = 1; row <= 9; row++) {
+                  blocksInputList.push(
+                    <input key={"row1"+row} inputMode='numeric' type="number" className={`table-row-cell table-section-${sectionIndex} table-row-${row}`} onKeyDown={(evt) => evt.key === 'e' && evt.preventDefault()} onChange={(e) => setName(e.target.value)}></input>
+                  );
+                  if(sectionLimit3 < 3) {
+                    sectionLimit3++;
+                  }
+                  else {
+                    sectionLimit3 = 1;
+                    sectionIndex++;
+                  }
                 }
-                else {
-                  sectionLimit3 = 1;
-                  sectionIndex++;
-                }
+                allInputsHtml.push(<div className='table-row'>{blocksInputList}</div>);
               }
-              return <div className='table-row'>{arr}</div>;
+              return allInputsHtml;
             })()}
-          </div>
-          <div className='table-row'>
-          {(() => {
-              const arr = [];
-              for (let index = 1; index <= 9; index++) {
-                arr.push(
-                  <input key={"row1"+index} inputMode='numeric' type="number" className={`table-row-cell table-row2-cell-${index}`} onKeyDown={(evt) => evt.key === 'e' && evt.preventDefault()} onChange={(e) => setName(e.target.value)}></input>
-                );
-              }
-              return arr;
-            })()}
-          </div>
-          <div className='table-row'>
-          {(() => {
-              const arr = [];
-              for (let index = 1; index <= 9; index++) {
-                arr.push(
-                  <input key={"row1"+index} inputMode='numeric' type="number" className={`table-row-cell table-row3-cell-${index}`} onKeyDown={(evt) => evt.key === 'e' && evt.preventDefault()} onChange={(e) => setName(e.target.value)}></input>
-                );
-              }
-              return arr;
-            })()}
-          </div>
         </div>
-        <button type='submit'>test</button>
+        <button type='submit'>SOLVE</button>
       </form>
 
   )
