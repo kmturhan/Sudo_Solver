@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Sudo_Solver/static/css/main.de9ee047.css",
+    "main.js": "/Sudo_Solver/static/js/main.38ddd56b.js",
+    "index.html": "/Sudo_Solver/index.html",
+    "main.de9ee047.css.map": "/Sudo_Solver/static/css/main.de9ee047.css.map",
+    "main.38ddd56b.js.map": "/Sudo_Solver/static/js/main.38ddd56b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.de9ee047.css",
+    "static/js/main.38ddd56b.js"
+  ]
+}
