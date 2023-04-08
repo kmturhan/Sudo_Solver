@@ -13,8 +13,8 @@ function MyForm() {
     let test = ["test","test2","test3"];
     
     console.log(test);
-    let rows = 10;
-    let cols = 10;
+    let rows = 9;
+    let cols = 9;
     let defaultValue = 50;
 
     let table = Array(rows).fill([]).map((x) => x = Array(cols).fill(defaultValue));
@@ -65,6 +65,8 @@ function MyForm() {
   )
 }
 
-
+function ControlRow() {
+  
+}
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<MyForm />);
