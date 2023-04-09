@@ -10,9 +10,7 @@ function MyForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log("test",event);
-    let test = ["test","test2","test3"];
     
-    console.log(test);
     let rows = 9;
     let cols = 9;
     let defaultValue = 50;
@@ -45,7 +43,7 @@ function MyForm() {
                 let sectionIndex = 1;
                 for (let column = 1; column <= 9; column++) {
                   blocksInputList.push(
-                    <input key={"test"+row+column} data-row={row} data-column={column} inputMode='numeric' type="number" className={`table-row-cell table-section-${sectionIndex} table-row-${row}`} onKeyDown={(evt) => evt.key === 'e' && evt.preventDefault()} onChange={(e) => setName(e.target.value)}></input>
+                   <input key={`test-${column}-${row}`} data-row={row} data-column={column} inputMode='numeric' type="number" className={`table-row-cell table-section-${sectionIndex} table-row-${row}`} onKeyDown={(evt) => evt.key === 'e' && evt.preventDefault()} onChange={(e) => setName(e.target.value)}></input>
                   );
                   if(sectionLimit3 < 3) {
                     sectionLimit3++;
@@ -55,7 +53,7 @@ function MyForm() {
                     sectionIndex++;
                   }
                 }
-                allInputsHtml.push(<div className='table-row'>{blocksInputList}</div>);
+                allInputsHtml.push(<div key={`table${row}`} className='table-row'>{blocksInputList}</div>);
               }
               return allInputsHtml;
             })()}
