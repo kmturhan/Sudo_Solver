@@ -1,8 +1,15 @@
 import { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-
-
+import {RowControl} from './controls.js';
+function IsEmptyCellDefineZero(value) {
+  if(value == "" || value == "undefined") {
+    return 0;
+  }
+  else {
+    return value;
+  }
+}
 
 function MyForm() {
   const [name, setName] = useState("");
@@ -19,7 +26,7 @@ function MyForm() {
     window.test = table;
     [...event.target].forEach(element => {
       try {
-        table[element.dataset.row - 1][element.dataset.column - 1] = 22;  
+        table[element.dataset.row - 1][element.dataset.column - 1] = parseInt(IsEmptyCellDefineZero(element.value));  
       } catch (error) {
         console.log("test", element.dataset.row , element.dataset.column);
       } 
@@ -27,7 +34,9 @@ function MyForm() {
       console.log(element.value);
       console.log(`cell-${element.dataset.row}-${element.dataset.column}`)
     });
-    console.table(table)
+    console.table(table);
+
+    RowControl(table[0], table);
   }
 
   return (
