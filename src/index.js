@@ -35,10 +35,9 @@ function MyForm() {
       console.log(`cell-${element.dataset.row}-${element.dataset.column}`)
     });
     console.table(table);
-    let sss = RowWithMostClues(table);
-    console.log("Row : ",sss);
-    let column = ColumnWithMostClues(table);
-    console.log("Column : ",column);
+    let rowCluesResult = RowWithMostClues(table);
+    let columnCluesResult = ColumnWithMostClues(table);
+    console.log("Selected Result : ",(rowCluesResult.cluesCount >= columnCluesResult.cluesCount ? rowCluesResult : columnCluesResult));
     //RowControl(table[0], table);
   }
 
