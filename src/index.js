@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import {RowControl} from './controls.js';
+import {RowControl, ColumnWithMostClues, RowWithMostClues} from './controls.js';
 function IsEmptyCellDefineZero(value) {
   if(value == "" || value == "undefined") {
     return 0;
@@ -35,8 +35,11 @@ function MyForm() {
       console.log(`cell-${element.dataset.row}-${element.dataset.column}`)
     });
     console.table(table);
-
-    RowControl(table[0], table);
+    let sss = RowWithMostClues(table);
+    console.log("Row : ",sss);
+    let column = ColumnWithMostClues(table);
+    console.log("Column : ",column);
+    //RowControl(table[0], table);
   }
 
   return (
@@ -72,8 +75,5 @@ function MyForm() {
   )
 }
 
-function ControlRow() {
-  
-}
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<MyForm />);
