@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import {RowControl, ColumnWithMostClues, RowWithMostClues} from './controls.js';
+import {RowControl, ColumnWithMostClues, RowWithMostClues, ColumnControl, ArrayToPlace, functionCall} from './controls.js';
 function IsEmptyCellDefineZero(value) {
   if(value == "" || value == "undefined") {
     return 0;
@@ -17,7 +17,7 @@ function MyForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log("test",event);
-    
+    //ArrayToPlace(event);
     let rows = 9;
     let cols = 9;
     let defaultValue = 50;
@@ -30,15 +30,15 @@ function MyForm() {
       } catch (error) {
         console.log("test", element.dataset.row , element.dataset.column);
       } 
-      
       console.log(element.value);
       console.log(`cell-${element.dataset.row}-${element.dataset.column}`)
     });
     console.table(table);
-    let rowCluesResult = RowWithMostClues(table);
-    let columnCluesResult = ColumnWithMostClues(table);
-    console.log("Selected Result : ",(rowCluesResult.cluesCount >= columnCluesResult.cluesCount ? rowCluesResult : columnCluesResult));
-    //RowControl(table[0], table);
+    let selectedArray = ColumnControl(table);
+    console.log(selectedArray);
+    RowControl(table[0], table, event);
+    //ArrayToPlace(table);
+    
   }
 
   return (
@@ -54,7 +54,7 @@ function MyForm() {
                 let sectionIndex = 1;
                 for (let column = 1; column <= 9; column++) {
                   blocksInputList.push(
-                   <input key={`test-${column}-${row}`} data-row={row} data-column={column} inputMode='numeric' type="number" className={`table-row-cell table-section-${sectionIndex} table-row-${row}`} onKeyDown={(evt) => evt.key === 'e' && evt.preventDefault()} onChange={(e) => setName(e.target.value)}></input>
+                   <input id={`cell-${row}-${column}`} key={`test-${row}-${column}`} data-row={row} data-column={column} inputMode='numeric' type="number" className={`table-row-cell table-section-${sectionIndex} table-row-${row}`} onKeyDown={(evt) => evt.key === 'e' && evt.preventDefault()} onChange={(e) => setName(e.target.value)}></input>
                   );
                   if(sectionLimit3 < 3) {
                     sectionLimit3++;
@@ -64,7 +64,7 @@ function MyForm() {
                     sectionIndex++;
                   }
                 }
-                allInputsHtml.push(<div key={`table${row}`} className='table-row'>{blocksInputList}</div>);
+                allInputsHtml.push(<div id={`table${row}`} key={`table${row}`} className='table-row'>{blocksInputList}</div>);
               }
               return allInputsHtml;
             })()}

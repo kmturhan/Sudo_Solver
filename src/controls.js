@@ -1,27 +1,46 @@
-export function RowControl(arrayRow, allTable) {
+export function RowControl(arrayRow, table,event) {
     let arr = [];
-
+    let rowToProcessInfo = ColumnControl(table);
     for(let index = 1;index <= 9;index++){
         arr.push(index);
     }
 
-    let removedArray = arr.filter((item) => !arrayRow.includes(item))
+
+    let removedArray = arr.filter((item) => !table[rowToProcessInfo.index].includes(item))
 
     removedArray.forEach(item => {
-        let foundZeroIndex = allTable[0].indexOf(0);
+        let foundZeroIndex = table[0].indexOf(0);
         if(foundZeroIndex != -1) {
-            allTable[0][foundZeroIndex] = item;
+            table[0][foundZeroIndex] = item;
         }
     });
-    console.table("Last allTable",allTable);
+    console.table("Last table",table);
+    ArrayToPlace(event, table);
 }
 
-export function ColumnControl(currentColumn, table) {
-    
+export function ArrayToPlace(event, table) {
+    for (let row = 1; row <= 9; row++) {
+        for (let column = 1; column <= 9; column++) {
+            document.getElementById(`cell-${row}-${column}`).value = table[row-1][column-1];        
+        }
+    }
+}
+
+export function ColumnControl(table) {
+    let rowCluesResult = RowWithMostClues(table);
+    let columnCluesResult = ColumnWithMostClues(table);
+    console.log("ROW : ",rowCluesResult);
+    console.log("Column : ",columnCluesResult);
+    if(rowCluesResult.cluesCount >= columnCluesResult.cluesCount) {
+        return rowCluesResult;//table[rowCluesResult.index];
+    }
+    else {
+        return columnCluesResult;//table.map(x => x[columnCluesResult.index]);
+    }
 }
 
 /* Take index of the row with the most clues */ 
-export function RowWithMostClues(table) {
+function RowWithMostClues(table) {
     let rowMostCluesIndex;
     let rowMostCluesCount;
     table.forEach((item,index) => {
@@ -40,7 +59,7 @@ export function RowWithMostClues(table) {
 }
 
 /* Take index of the column with the most clues */ 
-export function ColumnWithMostClues(table) {
+function ColumnWithMostClues(table) {
     let columnMostCluesIndex;
     let columnMostCluesCount;
 
